@@ -40,6 +40,12 @@ Monto: 999
 Descripción: Supermercado  
 Categoría: Despensa  
 
+## 📸 Evidencia
+
+### Resultado en ejecución
+
+![Resultado](./Captura.JPG)
+
 ## 👩‍💻 Autor
 
 Nancy Johana Frias Romero
