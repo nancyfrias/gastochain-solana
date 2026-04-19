@@ -1,0 +1,64 @@
+use anchor_lang::prelude::*;
+
+declare_id!("TvAJdDCghM8UpvhfZQKLmnaKWsN5mq6UYnMQkdChN7y");
+
+#[program]
+mod gastochain {
+    use super::*;
+
+    pub fn crear_gasto(
+        ctx: Context<CrearGasto>,
+        monto: u64,
+        descripcion: String,
+        categoria: String,
+    ) -> Result<()> {
+        let gasto: &mut Account<Gasto> = &mut ctx.accounts.gasto;
+        gasto.monto = monto;
+        gasto.descripcion = descripcion;
+        gasto.categoria = categoria;
+        msg!("Gasto creado");
+        Ok(())
+    }
+
+    pub fn actualizar_gasto(
+        ctx: Context<ActualizarGasto>,
+        monto: u64,
+        descripcion: String,
+        categoria: String,
+    ) -> Result<()> {
+        let gasto: &mut Account<Gasto> = &mut ctx.accounts.gasto;
+        gasto.monto = monto;
+        gasto.descripcion = descripcion;
+        gasto.categoria = categoria;
+        msg!("Gasto actualizado");
+        Ok(())
+    }
+}
+
+#[derive(Accounts)]
+pub struct CrearGasto<'info> {
+    #[account(init, payer = signer, space = 8 + Gasto::MAX_SIZE)]
+    pub gasto: Account<'info, Gasto>,
+    #[account(mut)]
+    pub signer: Signer<'info>,
+    pub system_program: Program<'info, System>,
+}
+
+#[derive(Accounts)]
+pub struct ActualizarGasto<'info> {
+    #[account(mut)]
+    pub gasto: Account<'info, Gasto>,
+}
+
+#[account]
+pub struct Gasto {
+    pub monto: u64,
+    pub descripcion: String,
+    pub categoria: String,
+}
+
+impl Gasto {
+    pub const MAX_SIZE: usize = 8 +        // monto
+        4 + 100 +  // descripcion
+        4 + 50; // categoria
+}
