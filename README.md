@@ -53,6 +53,14 @@ Categoría: Despensa
 
 ![CRUD](./gastochain.JPG)
 
+## 🧠 Conceptos aprendidos
+
+- Modelo de cuentas en Solana
+- Uso de Anchor framework
+- Persistencia de datos on-chain
+- Manejo de transacciones
+- CRUD completo en blockchain
+
 ## 👩‍💻 Autor
 
 Nancy Johana Frias Romero
