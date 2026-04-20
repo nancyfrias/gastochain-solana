@@ -7,6 +7,7 @@ GastoChain es un smart contract desarrollado en Solana usando Anchor que permite
 - Crear un gasto
 - Leer un gasto
 - Actualizar un gasto
+- Eliminar un gasto
 
 ## 📦 Estructura del gasto
 
@@ -45,6 +46,12 @@ Categoría: Despensa
 ### Resultado en ejecución
 
 ![Resultado](./Captura.JPG)
+
+## 📸 Evidencia completa
+
+### Flujo CRUD en ejecución
+
+![CRUD](./Captura.JPG)
 
 ## 👩‍💻 Autor
 
