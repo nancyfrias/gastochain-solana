@@ -51,7 +51,7 @@ Categoría: Despensa
 
 ### Flujo CRUD en ejecución
 
-![CRUD](./Captura.JPG)
+![CRUD](./gastochain.JPG)
 
 ## 👩‍💻 Autor
 
