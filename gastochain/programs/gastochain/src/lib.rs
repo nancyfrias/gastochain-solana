@@ -12,11 +12,22 @@ mod gastochain {
         descripcion: String,
         categoria: String,
     ) -> Result<()> {
-        let gasto: &mut Account<Gasto> = &mut ctx.accounts.gasto;
+        let gasto = &mut ctx.accounts.gasto;
         gasto.monto = monto;
         gasto.descripcion = descripcion;
         gasto.categoria = categoria;
-        msg!("Gasto creado");
+
+        msg!("Gasto creado correctamente");
+        Ok(())
+    }
+
+    pub fn leer_gasto(ctx: Context<LeerGasto>) -> Result<()> {
+        let gasto = &ctx.accounts.gasto;
+
+        msg!("Monto: {}", gasto.monto);
+        msg!("Descripcion: {}", gasto.descripcion);
+        msg!("Categoria: {}", gasto.categoria);
+
         Ok(())
     }
 
@@ -26,11 +37,17 @@ mod gastochain {
         descripcion: String,
         categoria: String,
     ) -> Result<()> {
-        let gasto: &mut Account<Gasto> = &mut ctx.accounts.gasto;
+        let gasto = &mut ctx.accounts.gasto;
         gasto.monto = monto;
         gasto.descripcion = descripcion;
         gasto.categoria = categoria;
-        msg!("Gasto actualizado");
+
+        msg!("Gasto actualizado correctamente");
+        Ok(())
+    }
+
+    pub fn eliminar_gasto(_ctx: Context<EliminarGasto>) -> Result<()> {
+        msg!("Gasto eliminado correctamente");
         Ok(())
     }
 }
@@ -39,15 +56,31 @@ mod gastochain {
 pub struct CrearGasto<'info> {
     #[account(init, payer = signer, space = 8 + Gasto::MAX_SIZE)]
     pub gasto: Account<'info, Gasto>,
+
     #[account(mut)]
     pub signer: Signer<'info>,
+
     pub system_program: Program<'info, System>,
+}
+
+#[derive(Accounts)]
+pub struct LeerGasto<'info> {
+    pub gasto: Account<'info, Gasto>,
 }
 
 #[derive(Accounts)]
 pub struct ActualizarGasto<'info> {
     #[account(mut)]
     pub gasto: Account<'info, Gasto>,
+}
+
+#[derive(Accounts)]
+pub struct EliminarGasto<'info> {
+    #[account(mut, close = signer)]
+    pub gasto: Account<'info, Gasto>,
+
+    #[account(mut)]
+    pub signer: Signer<'info>,
 }
 
 #[account]
@@ -62,3 +95,6 @@ impl Gasto {
         4 + 100 +  // descripcion
         4 + 50; // categoria
 }
+
+
+
